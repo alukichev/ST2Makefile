@@ -86,6 +86,8 @@ except Exception, e:
     sys.stderr.write("Error: cannot parse TrueSTUDIO .project file: %s\r\n" % ts_project)
     sys.exit(T2M_ERR_PROJECT_FILE)
 nodes = root.findall('linkedResources/link[type=\'1\']/locationURI')
+if not nodes:
+    nodes = root.findall('linkedResources/link[type=\'1\']/location')
 sources = []
 for node in nodes:
     sources.append(replace_path(node.text))
